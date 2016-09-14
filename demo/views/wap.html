@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>MiniCheckout</title>
+    <link rel="stylesheet" type="text/css" href="../styles/pinus.css">
+</head>
+<body>
+<header>
+    <div class="h_content">
+        <span></span>
+    </div>
+</header>
+<section class="block">
+    <div class="content2">
+        <div class="app">
+            <span class="iphone"><img src="../img/bgpic.jpg" width="100%" height="auto"></span>
+            <label class="text_amount">
+                <input id="amount" type="text" placeholder="金 额"/>
+            </label>
+
+            <div class="ch">
+                <span class="up" onclick="wap_pay('upacp_wap')">银联 WAP</span>
+                <span class="up" onclick="wap_pay('alipay_wap')">支付宝 WAP</span>
+                <span class="up" onclick="wap_pay('bfb_wap')">百度钱包 WAP</span>
+                <span class="up" onclick="wap_pay('jdpay_wap')">京东支付 WAP</span>
+                <span class="up" onclick="wap_pay('yeepay_wap')">易宝支付 WAP</span>
+                <span class="up" onclick="wap_pay('wx_pub')">微信浏览器内公众号支付 WAP</span>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="../../dist/pingpp.js" type="text/javascript"></script>
+<script>
+
+    var charge2 = {
+        "id": "2011609080000014561",
+        "object": "order",
+        "created": 1473319284,
+        "livemode": true,
+        "paid": false,
+        "refunded": false,
+        "status": "created",
+        "app": "app_LibTW1n1SOq9Pin1",
+        "uid": "user0002333",
+        "merchant_order_no": "20111609810011",
+        "type": "purchase",
+        "amount": 100,
+        "coupon_amount": 0,
+        "balance_amount": 0,
+        "charge_amount": 100,
+        "amount_refunded": 0,
+        "currency": "cny",
+        "subject": "subject_test",
+        "body": "body_test",
+        "client_ip": "192.168.0.1",
+        "time_paid": null,
+        "time_expire": 1473405684,
+        "refunds":{
+            "object": "list",
+            "url": "/v1/orders/2011609080000014561/refunds",
+            "has_more": false,
+            "data":[]
+        },
+        "charge": "ch_DmfzXD40ezz1GGKKKCXLKyPK",
+        "balance_transaction": null,
+        "coupon": null,
+        "description": "",
+        "metadata":{},
+        "charge_essentials":{
+            "channel": "jdpay_wap",
+            "transaction_no": null,
+            "credential":{
+                "object": "credential",
+                "jdpay_wap":{
+                    "version": "V2.0",
+                    "merchant": "110078720001",
+                    "tradeNum": "a9f5489c5bd72dbf3ff1029e720827bf0b86333e1975f05e",
+                    "tradeName": "5f9c01875e224d3dcea5d0ffa49104f6",
+                    "tradeDesc": "071214743d56a9ef345babb9b275fdc0",
+                    "tradeTime": "443c10d7a2d9ea88d16759da8f43f64f3a8927799194e937",
+                    "amount": "774cb0357fcc6c4d",
+                    "orderType": "bc30cae95aa8297e",
+                    "currency": "aeb4eba53ff53ee1",
+                    "callbackUrl": "52285455ed99da0dc1de8370c1025f548bfd8cba68e5576e2bbe298f827365f25b87817321a11d7d7e299a8af86494fa2957970a95d40c94bcbd22af61bc026e",
+                    "notifyUrl": "e63ee6189572f142c1de8370c1025f548bfd8cba68e5576e50e5a1e5026db8698f728312a9f6ea34cde09004a04df6fac1900a94d99b5783c20f59b311c72221afcb3d83190fd4faa61deee8394e9020104b75c75608bddaffd7c572af288e77",
+                    "note": "5781a107b601165d",
+                    "expireTime": "3ac2e2f64d6c5acc14a5217fc0b91e8b",
+                    "sign": "DyTpvHjbezbsSCQdlXx8OJ0ZhOh8A4StHvI1+FpviHa2KrYXY7ehFOS8yA+RS+GKCEmvzg7io4j4senV7GFBSgehpiVTwstv6XaIwnELs8ntiUZ3G2dZGtL+qOjAdvcaly4Ig6IEcKtqUbw0HElCGQ5Sj7S0Vs9xI8lBn2GbJS0=",
+                    "channelUrl": "https://h5pay.jd.com/jdpay/saveOrder"
+                }
+            },
+            "extra":{
+                "success_url": "http://218.244.151.190/demo/result/f8ae15bdf7626a87/success"
+            }
+        }
+    };
+
+
+    function wap_pay(channel) {
+        var amount = document.getElementById('amount').value * 100;
+
+        var orderNo = new Date().getTime();
+
+        /*var xhr = new XMLHttpRequest();
+        xhr.open("POST", "http://218.244.151.190/demo/charge", true);
+//      xhr.setRequestHeader("Content-Type", "application/json;charset=utf-8");
+//		xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        xhr.send(JSON.stringify({
+            channel: channel,
+            amount: amount,
+            order_no:orderNo
+        }));
+
+        xhr.onreadystatechange = function () {
+            console.log(xhr.responseText);
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                console.log(xhr.responseText);
+                pingpp.createPayment(charge, function(result, err) {
+                    console.log(result);
+                    console.log(err.msg);
+                    console.log(err.extra);
+                });
+            }
+        };*/
+
+        pingpp.createPayment(charge2, function(result, err) {
+            console.log(result);
+            console.log(err.msg);
+            console.log(err.extra);
+        });
+    }
+</script>
+</body>
+</html>
